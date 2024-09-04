@@ -1,9 +1,10 @@
-// App.js
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Shared/Header';
 import Footer from './components/Shared/Footer';
 import Album from './components/Album/Album';
-
+import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
 
 function App() {
   const album = {
@@ -17,17 +18,26 @@ function App() {
   };
 
   return (
-    <div>
-      <Header />
-      <main>
-        <Album
-          title={album.title}
-          coverImage={album.coverImage}
-          photos={album.photos}
-        />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route 
+              path="/" 
+              element={<Album
+                          title={album.title}
+                          coverImage={album.coverImage}
+                          photos={album.photos}
+                       />} 
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Auth.module.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ const Register = () => {
     }
     // Kayıt işlemleri burada yapılacak (API entegrasyonu vs.)
     console.log('Registration Successful');
-    history.push('/login'); // Örnek yönlendirme
+    navigate('/login', { replace: true }); // Örnek yönlendirme
   };
 
   return (

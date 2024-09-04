@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Auth.module.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Giriş işlemleri burada yapılacak (API entegrasyonu vs.)
     console.log('Login Successful');
-    history.push('/dashboard'); // Örnek yönlendirme
+    navigate('/dashboard', { replace: true }); // Örnek yönlendirme
   };
 
   return (
