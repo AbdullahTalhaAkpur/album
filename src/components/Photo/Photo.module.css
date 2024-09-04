@@ -1,0 +1,12 @@
+.photoContainer {
+          padding: 8px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        }
+        
+        .photo {
+          width: 100%;
+          height: auto;
+          border-radius: 4px;
+        }
