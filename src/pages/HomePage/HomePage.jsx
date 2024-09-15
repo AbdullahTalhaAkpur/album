@@ -1,10 +1,13 @@
 import React from "react";
+import Book from "../../components/Album/Book";
 
 const Home = () => {
           return (
               <div>
                   <h1>Home Sayfası</h1>  
-              </div>      
+                   <Book/> 
+              </div>   
+
           );
 }
 
