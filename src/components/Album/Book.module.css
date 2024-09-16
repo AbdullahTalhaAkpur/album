@@ -1,0 +1,12 @@
+.flipbook {
+          width: 100%;
+          height: auto;
+          /* Add other styles for the book layout */
+        }
+        
+        .page {
+          width: 400px;
+          height: 300px;
+          /* Add specific styles for each page */
+        }
+        
