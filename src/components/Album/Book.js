@@ -1,40 +1,31 @@
-// src/components/Album/Book.js
-import React, { useEffect, useRef } from "react";
-import $ from "jquery";
-import "turn.js";
+import React from "react";
+import HTMLFlipBook from "react-pageflip";
+import './Book.css'; // Make sure the CSS file is linked
 
-const Book = ({ albums }) => {
-  const bookRef = useRef(null);
+// Import images
+import abdullahImage from '../../assets/images/ABDULLAH.jpg';
+import apoImage from '../../assets/images/apo.jpg';
 
-  useEffect(() => {
-    const bookElement = bookRef.current; // Store the ref in a local variable
-
-    $(bookElement).turn({
-      width: 400,
-      height: 300,
-      autoCenter: true,
-    });
-
-    return () => {
-      $(bookElement).turn("destroy"); // Cleanup the flipbook when the component unmounts
-    };
-  }, []);
-
+const Book = () => {
   return (
-    <div ref={bookRef} className="flipbook">
-      {albums && albums.length > 0 ? (
-        albums.map((album, index) => (
-          <div key={index} className="page">
-            <h3>{album.title}</h3>
-            <p>Created by: {album.creator}</p>
-            {/* You can also add more details like album content or collaborators */}
-          </div>
-        ))
-      ) : (
-        <div className="page">
-          <p>No albums available</p>
+    <div className="book-container">
+      <HTMLFlipBook width={300} height={400} showCover={true}>
+        {/* Page 1 */}
+        <div className="book-page">
+          <h3>My First Album</h3>
+          <img src={abdullahImage} alt="Denizli Landscape" />
+          <p>Page 1: Add your description here.</p>
         </div>
-      )}
+
+        {/* Page 2 */}
+        <div className="book-page">
+          <h3>Memories</h3>
+          <img src={apoImage} alt="At Home" />
+          <p>Page 2: Add another description here.</p>
+        </div>
+
+        {/* Additional pages can be added here */}
+      </HTMLFlipBook>
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
-import 'turn.js';
 import styles from './Album.module.css';
 
 const Album = () => {
@@ -24,7 +22,7 @@ const Album = () => {
   // Initialize Turn.js for each album after rendering the albums
   useEffect(() => {
     albums.forEach((_, index) => {
-      $(`#album-${index}`).turn({
+      (`#album-${index}`).turn({
         width: 400,
         height: 300,
         autoCenter: true,
@@ -34,7 +32,7 @@ const Album = () => {
     // Cleanup on unmount
     return () => {
       albums.forEach((_, index) => {
-        $(`#album-${index}`).turn('destroy');
+        (`#album-${index}`).turn('destroy');
       });
     };
   }, [albums]);

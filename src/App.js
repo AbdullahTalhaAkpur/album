@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/HomePage/HomePage';
 import Header from './components/Shared/Header';
 import Footer from './components/Shared/Footer';
 import Album from './components/Album/Album';
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <main>
           <Routes>
+            <Route path='/src/pages/HomePage/HomePage.jsx' element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route 

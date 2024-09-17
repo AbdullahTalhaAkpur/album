@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Book from "../../components/Album/Book";
 import { fetchAlbums, createAlbum, updateAlbum, deleteAlbum } from "../../services/api";
+import Book from "../../components/Album/Book";
+import './HomePage.module.css'
 
 const Home = () => {
   const [albums, setAlbums] = useState([]);
@@ -10,11 +11,12 @@ const Home = () => {
   const [collaborators, setCollaborators] = useState(""); // New state for adding friends
 
   useEffect(() => {
-    // Fetch albums on component mount
-    fetchAlbums()
-      .then(setAlbums)
-      .catch(console.error);
+    fetchAlbums().then(albums => {
+      console.log(albums); // Check if albums are correctly fetched
+      setAlbums(albums);
+    }).catch(console.error);
   }, []);
+  
 
   // Handle creating a new album
   const handleCreateAlbum = () => {
@@ -53,10 +55,9 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Ana Sayfa</h1>
-
+      <Book/>
       {/* New Album Input */}
-      <div>
+      <div className="home-container">
         <input
           type="text"
           placeholder="New Album Title"
@@ -103,9 +104,6 @@ const Home = () => {
           </div>
         ))}
       </div>
-
-      {/* Display the book flip animation */}
-      <Book albums={albums} /> {/* Pass albums to Book component */}
     </div>
   );
 };

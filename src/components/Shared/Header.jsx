@@ -9,7 +9,7 @@ const Header = () => {
         <h1>DigiAl</h1>
       </div>
       <nav className={styles.nav}>
-        <Link to="/" className={styles.homeLink}>Home</Link>
+        <Link to="/src/pages/HomePage/HomePage.jsx" className={styles.homeLink}>Home</Link>
         <Link to="/login" className={styles.buttonLink}>Login</Link>
          {/* Voltage button for Register */}
          <Link to="/register" className={styles.voltageButton}>
