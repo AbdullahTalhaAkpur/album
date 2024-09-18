@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const userRoutes = require('./models/user')
 
 const app = express();
 
@@ -12,6 +13,7 @@ const MONGO_URI = process.env.MONGO_URI; // Load MongoDB URI from .env
 // Middleware
 app.use(express.json());  // Parses incoming JSON requests
 app.use(cors());  // Enables CORS for all routes
+app.use('/backend/models', userRoutes);
 
 // MongoDB connection
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

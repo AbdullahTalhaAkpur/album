@@ -9,25 +9,36 @@ const Home = () => {
   const [editAlbumId, setEditAlbumId] = useState(null);
   const [editAlbumTitle, setEditAlbumTitle] = useState("");
   const [collaborators, setCollaborators] = useState(""); // New state for adding friends
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
-    fetchAlbums().then(albums => {
-      console.log(albums); // Check if albums are correctly fetched
-      setAlbums(albums);
-    }).catch(console.error);
+    fetchAlbums()
+      .then(albums => {
+        console.log(albums); // Check if albums are correctly fetched
+        setAlbums(albums);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setError("Failed to load albums.");
+        setLoading(false);
+      });
   }, []);
-  
 
   // Handle creating a new album
   const handleCreateAlbum = () => {
     if (newAlbum.trim()) {
-      createAlbum({ title: newAlbum, collaborators: collaborators.split(",") }) // Add collaborators field
+      createAlbum({ title: newAlbum, collaborators: collaborators.split(",") })
         .then((newAlbumData) => {
           setAlbums([...albums, newAlbumData]);
           setNewAlbum("");
           setCollaborators("");
         })
-        .catch(console.error);
+        .catch(err => {
+          console.error(err);
+          setError("Failed to create album.");
+        });
     }
   };
 
@@ -40,7 +51,10 @@ const Home = () => {
           setEditAlbumId(null);
           setEditAlbumTitle("");
         })
-        .catch(console.error);
+        .catch(err => {
+          console.error(err);
+          setError("Failed to update album.");
+        });
     }
   };
 
@@ -50,12 +64,19 @@ const Home = () => {
       .then(() => {
         setAlbums(albums.filter((album) => album._id !== id));
       })
-      .catch(console.error);
+      .catch(err => {
+        console.error(err);
+        setError();
+      });
   };
 
   return (
     <div>
-      <Book/>
+      <Book />
+      
+      {/* Error Message */}
+      {error && <div className="error">{error}</div>}
+      
       {/* New Album Input */}
       <div className="home-container">
         <input
@@ -73,36 +94,42 @@ const Home = () => {
         <button onClick={handleCreateAlbum}>Create Album</button>
       </div>
 
-      {/* Album List with Edit and Delete */}
+      {/* Album List */}
       <div>
-        {albums.map((album) => (
-          <div key={album._id}>
-            {editAlbumId === album._id ? (
-              <div>
-                <input
-                  type="text"
-                  value={editAlbumTitle}
-                  onChange={(e) => setEditAlbumTitle(e.target.value)}
-                />
-                <button onClick={() => handleUpdateAlbum(album._id)}>Update</button>
-                <button onClick={() => setEditAlbumId(null)}>Cancel</button>
-              </div>
-            ) : (
-              <div>
-                <span>{album.title} by {album.creator}</span> {/* Display creator's name */}
-                <button
-                  onClick={() => {
-                    setEditAlbumId(album._id);
-                    setEditAlbumTitle(album.title);
-                  }}
-                >
-                  Edit
-                </button>
-                <button onClick={() => handleDeleteAlbum(album._id)}>Delete</button>
-              </div>
-            )}
-          </div>
-        ))}
+        {loading ? (
+          <p>Loading albums...</p> // Show loading indicator
+        ) : albums.length === 0 ? (
+          <p>No albums available.</p> // No albums message
+        ) : (
+          albums.map((album) => (
+            <div key={album._id}>
+              {editAlbumId === album._id ? (
+                <div>
+                  <input
+                    type="text"
+                    value={editAlbumTitle}
+                    onChange={(e) => setEditAlbumTitle(e.target.value)}
+                  />
+                  <button onClick={() => handleUpdateAlbum(album._id)}>Update</button>
+                  <button onClick={() => setEditAlbumId(null)}>Cancel</button>
+                </div>
+              ) : (
+                <div>
+                  <span>{album.title} by {album.creator}</span> {/* Display creator's name */}
+                  <button
+                    onClick={() => {
+                      setEditAlbumId(album._id);
+                      setEditAlbumTitle(album.title);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => handleDeleteAlbum(album._id)}>Delete</button>
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

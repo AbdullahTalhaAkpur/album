@@ -1,7 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const Album = require('../routes/album');
+const User = require('../models/user')
 
+// Add Friend Route
+router.post('/addFriend', (req, res) => {
+  const { userId, friendId } = req.body;
+  User.findByIdAndUpdate(userId, { $push: { friends: friendId } }, { new: true })
+    .then(updatedUser => res.json(updatedUser))
+    .catch(err => res.status(500).send('Error adding friend'));
+});
 
 // Create a new album
 router.post('/', async (req, res) => {

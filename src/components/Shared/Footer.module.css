@@ -2,8 +2,9 @@
   background-color: #88bebe27;
   padding: 30px 0;
   bottom: 0;
-  width: 100%;
-  position: fixed;
+  width: 105%;
+  position: relative;
+
 }
 
 .container {
@@ -11,6 +12,7 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
