@@ -16,6 +16,7 @@
   display: flex;
   gap: 50px;
   padding: 40px;
+  align-items: center;
 }
 
 .nav a {
@@ -236,4 +237,27 @@
 .homeLink {
   padding-left: 60px;
   font-size: 50px;
+}
+
+.notificationContainer {
+  position: relative;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.notificationIcon {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0F1C53;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: rgb(19, 237, 124);
+  color: white;
+  border-radius: 54%;
+  padding: 4px 8px;
+  font-size: 16px;
 }

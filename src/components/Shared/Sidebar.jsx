@@ -3,8 +3,6 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Box } f
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
-import InsightsIcon from '@mui/icons-material/Insights';
-import DescriptionIcon from '@mui/icons-material/Description';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MessageIcon from '@mui/icons-material/Message';
@@ -55,8 +53,6 @@ const Sidebar = () => {
   const menuItems = [
     { text: 'Dashboard', icon: <HomeIcon /> },
     { text: 'Search', icon: <SearchIcon /> },
-    { text: 'Insights', icon: <InsightsIcon /> },
-    { text: 'Docs', icon: <DescriptionIcon /> },
     { text: 'Products', icon: <ShoppingCartIcon /> },
     { text: 'Settings', icon: <SettingsIcon /> },
     { text: 'Messages', icon: <MessageIcon /> },

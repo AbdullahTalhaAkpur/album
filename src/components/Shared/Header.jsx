@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
+import { FaBell } from 'react-icons/fa'; // Import a bell icon from react-icons
 
 const Header = () => {
+  const unreadNotifications = 3; // Example: You can set this dynamically from state
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -11,8 +14,9 @@ const Header = () => {
       <nav className={styles.nav}>
         <Link to="/" className={styles.homeLink}>Home</Link>
         <Link to="/login" className={styles.buttonLink}>Login</Link>
-         {/* Voltage button for Register */}
-         <Link to="/register" className={styles.voltageButton}>
+        
+        {/* Voltage button for Register */}
+        <Link to="/register" className={styles.voltageButton}>
           <button>Register</button>
           <svg
             version="1.1"
@@ -56,6 +60,14 @@ const Header = () => {
             <div className={styles.dot5}></div>
           </div>
         </Link>
+
+        {/* Notification Icon */}
+        <div className={styles.notificationContainer}>
+          <FaBell className={styles.notificationIcon} />
+          {unreadNotifications > 0 && (
+            <span className={styles.notificationBadge}>{unreadNotifications}</span>
+          )}
+        </div>
         
       </nav>
     </header>
