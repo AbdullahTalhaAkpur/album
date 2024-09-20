@@ -26,48 +26,60 @@ const Home = () => {
       });
   }, []);
 
-  // Handle creating a new album
-  const handleCreateAlbum = () => {
-    if (newAlbum.trim()) {
-      createAlbum({ title: newAlbum, collaborators: collaborators.split(",") })
-        .then((newAlbumData) => {
-          setAlbums([...albums, newAlbumData]);
-          setNewAlbum("");
-          setCollaborators("");
-        })
-        .catch(err => {
-          console.error(err);
-          setError("Failed to create album.");
-        });
-    }
-  };
-
-  // Handle updating an existing album
-  const handleUpdateAlbum = (id) => {
-    if (editAlbumTitle.trim()) {
-      updateAlbum(id, { title: editAlbumTitle })
-        .then((updatedAlbum) => {
-          setAlbums(albums.map((album) => (album._id === id ? updatedAlbum : album)));
-          setEditAlbumId(null);
-          setEditAlbumTitle("");
-        })
-        .catch(err => {
-          console.error(err);
-          setError("Failed to update album.");
-        });
-    }
-  };
-
-  // Handle deleting an album
-  const handleDeleteAlbum = (id) => {
-    deleteAlbum(id)
-      .then(() => {
-        setAlbums(albums.filter((album) => album._id !== id));
+// Improved create album function
+const handleCreateAlbum = () => {
+  if (newAlbum.trim()) {
+    setLoading(true);
+    createAlbum({ title: newAlbum, collaborators: collaborators.split(",").map(c => c.trim()) })
+      .then((newAlbumData) => {
+        setAlbums(prevAlbums => [...prevAlbums, newAlbumData]);
+        setNewAlbum("");
+        setCollaborators("");
+        setError(null);
       })
       .catch(err => {
         console.error(err);
-        setError();
-      });
+        setError("Failed to create album. Please try again.");
+      })
+      .finally(() => setLoading(false));
+  }
+};
+
+  // Improved update album function
+  const handleUpdateAlbum = (id) => {
+    if (editAlbumTitle.trim()) {
+      setLoading(true);
+      updateAlbum(id, { title: editAlbumTitle })
+        .then((updatedAlbum) => {
+          setAlbums(prevAlbums => prevAlbums.map((album) => (album._id === id ? updatedAlbum : album)));
+          setEditAlbumId(null);
+          setEditAlbumTitle("");
+          setError(null);
+        })
+        .catch(err => {
+          console.error(err);
+          setError("Failed to update album. Please try again.");
+        })
+        .finally(() => setLoading(false));
+    }
+  };
+
+
+   // Improved delete album function
+   const handleDeleteAlbum = (id) => {
+    if (window.confirm("Are you sure you want to delete this album?")) {
+      setLoading(true);
+      deleteAlbum(id)
+        .then(() => {
+          setAlbums(prevAlbums => prevAlbums.filter((album) => album._id !== id));
+          setError(null);
+        })
+        .catch(err => {
+          console.error(err);
+          setError("Failed to delete album. Please try again.");
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   return (

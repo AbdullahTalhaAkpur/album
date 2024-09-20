@@ -8,6 +8,7 @@ import Album from './components/Album/Album';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Sidebar from './components/Shared/Sidebar';
+import PhotoAlbum from './components/Photo/Photo';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           width: '100%'
         }}>
           <Header />
+          <PhotoAlbum/>
           <Box sx={{ p: 3 }}>
             <Routes>
               <Route path='/' element={<Home />} />

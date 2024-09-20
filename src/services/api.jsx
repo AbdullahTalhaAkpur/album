@@ -88,3 +88,14 @@ export const deletePhotoFromAlbum = async (albumId, photoId) => {
     throw error;
   }
 };
+
+// Add a friend to a user
+export const addFriend = async (userId, friendId) => {
+  try {
+    const response = await axios.post(`${API_URL}/users/${userId}/friends`, { friendId });
+    return response.data;
+  } catch (error) {
+    console.error(`Error adding friend to user ${userId}:`, error);
+    throw error;
+  }
+};

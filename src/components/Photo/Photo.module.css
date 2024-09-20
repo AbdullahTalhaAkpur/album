@@ -1,12 +1,87 @@
-.photoContainer {
-          padding: 8px;
-          background-color: #fff;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-        }
-        
-        .photo {
-          width: 100%;
-          height: auto;
-          border-radius: 4px;
-        }
+.album-container {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 800px; /* Limits the width of the album */
+  margin: 0 auto; /* Center the album */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.album-book {
+  transform-style: preserve-3d;
+  transition: transform 0.5s; /* Smooth transition for page turning */
+  width: 100%;
+}
+
+.album-page {
+  display: none; /* Hide all pages initially */
+  position: absolute; /* Position all pages on top of each other */
+  width: 100%;
+  height: 600px; /* Fixed height for each page */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  grid-gap: 10px; /* Space between grid items */
+  padding: 20px;
+  background: white; /* Background color for pages */
+  border: 1px solid #ddd; /* Border for pages */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  backface-visibility: hidden; /* Prevents seeing the back of the page */
+}
+
+.album-page.current {
+  display: block; /* Show the current page */
+}
+
+.photo-slot {
+  box-sizing: border-box; /* Ensure padding is included in width */
+  margin: 10px; /* Margin for spacing */
+}
+
+.photo-slot img {
+  width: 100%; /* Image fits within the slot */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.add-photo-label {
+  cursor: pointer; /* Pointer cursor for label */
+  display: block;
+  text-align: center; /* Center text in label */
+  padding: 10px; /* Padding for label */
+  border: 1px dashed #ccc; /* Dashed border for empty slots */
+}
+
+.add-photo-label input {
+  display: none; /* Hide file input */
+}
+
+.album-controls {
+  margin-top: 20px; /* Space above controls */
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+}
+
+.album-controls button {
+  padding: 10px 20px; /* Button padding */
+  background: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.album-controls button:disabled {
+  background: #cccccc; /* Grey background for disabled buttons */
+  cursor: not-allowed; /* Not-allowed cursor */
+}
+
+@media (max-width: 600px) {
+  .album-page {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+  }
+}
+
+@media (max-width: 400px) {
+  .album-page {
+    grid-template-columns: 1fr; /* One column on very small screens */
+  }
+}

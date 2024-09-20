@@ -14,7 +14,7 @@
         
         .photosGrid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 10px;
         }
         
@@ -29,9 +29,13 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          gap: 20px;
         }
         
         .album {
+          border: 1px solid #ddd;
+          padding: 20px;
+          width: 300px;
           margin: 20px;
         }
         
